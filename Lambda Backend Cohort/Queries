@@ -2,3 +2,5 @@
 2. Look into prototypes and callbacks
 3. Learn usecase of map function realistically and practice 3 basic and 5-6 intermediate ones
 4. Understand in great depth about comparator function and how to sort in asc/desc
+5. Look into the difference b/w compiled and interpreted languages and in what category does JS fall under?
+6. Dive deep into hoisting | let vs const vs var | scopes (global, function, block)
