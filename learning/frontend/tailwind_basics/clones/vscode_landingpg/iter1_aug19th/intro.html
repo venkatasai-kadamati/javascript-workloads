@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VScode Landing Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+<div class="flex flex-col bg-amber-300 min-h-screen">
+    <!-- navbar section-->
+    <nav class="border-3 sticky flex bg-white p-4">
+        <div class="flex flex-1 gap-4 justify-center items-center">
+            <img alt="vscode logo" height="25" src="../images/new_vscode_logo.png" width="25">
+            <div class="font-bold text-xl">Visual Studio Code</div>
+        </div>
+        <div class="flex-2  justify-center items-center">
+            <ul class="flex gap-4">
+                <li>Features</li>
+                <li>Docs</li>
+                <li>Release Notes</li>
+                <li>Blog</li>
+                <li>Learn</li>
+                <li>Events</li>
+                <li>Resources</li>
+            </ul>
+        </div>
+        <div class="flex-1 flex gap-4">
+            <div class="border-2 px-1">
+                <span>🔍</span>
+                <span>Search</span>
+                <span>⌘ Q K</span>
+            </div>
+            <button>☽</button>
+            <button>Download</button>
+        </div>
+    </nav>
+    <!--hero section-->
+    <div class="border-3 bg-[url('../images/hero_banner_bg.png')] min-h-screen flex flex-col justify-center items-center gap-6 pt-10">
+        <h1 class="font-bold text-6xl">The open source AI code editor</h1>
+        <p class="text-black text-3xl">Your home for multi-agent development</p>
+        <div class="flex flex-col justify-center items-center border-amber-100 bg-gray-100 rounded-xl p-4">
+            <button class="bg-black text-white px-10 py-3 rounded-xl hover:bg-grey-100">Download for macos</button>
+            <p>Web, Insiders editor or other platforms</p>
+            <p class="text-sm">By using VS Code, you agree to its licenes and privacy statement</p>
+        </div>
+
+        <img alt="" class=" rounded-2xl" src="../images/img.png">
+    </div>
+</div>
+</body>
+</html>

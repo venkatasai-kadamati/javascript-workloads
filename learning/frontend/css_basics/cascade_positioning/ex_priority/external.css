@@ -1,0 +1,12 @@
+h1 {
+    background: red;
+
+}
+
+* {
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: black solid;
+    font: -apple-system-body;
+}
