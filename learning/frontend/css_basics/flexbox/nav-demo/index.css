@@ -1,0 +1,30 @@
+nav {
+    display: flex;
+    background: yellow;
+    border: black solid;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+}
+
+.left-nav-container {
+    background-color: green;
+    font-size: x-large;
+}
+
+.middle-nav-container ul {
+    display: flex;
+    gap: 6px;
+    background-color: skyblue;
+
+}
+
+.right-nav-container {
+    background-color: lightcoral;
+    display: flex;
+    flex-grow: 0;
+}
