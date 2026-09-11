@@ -1,19 +1,26 @@
 # Dependencies
 node_modules/
-pnpm-lock.yaml
-package-lock.json
-yarn.lock
 
-# Build & Dist
+# Lockfiles — keep the root npm lockfile only
+**/package-lock.json
+!/package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lock
+bun.lockb
+
+# Build
 dist/
 build/
 out/
 .next/
+.turbo
+.vercel
+.cache
 *.tsbuildinfo
 
 # Vite
 .vite/
-
 
 # Testing
 coverage/
@@ -28,45 +35,18 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
 # Environment
 .env
 .env.local
 .env.*.local
 
-# IDE & Editor
+# IDE & OS
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 .DS_Store
-.project
-.classpath
-*.iml
-.sublime-project
-.sublime-workspace
-*.sublime-settings
-
-# OS
-.DS_Store
 Thumbs.db
-*.exe
-*.dll
-
-# Temp files
-*.tmp
-*.temp
-.trash/
-
-# Node
-npm-debug.log
-.node_modules.bin
-
-# OS-specific
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
+*.iml

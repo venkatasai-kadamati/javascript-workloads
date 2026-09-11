@@ -1,12 +1,11 @@
-// placeholder for package.json
-
 {
-  "name": "@root/scope_name",
-  "version": "major.minor.patch", // use ^ for locking major, ~ for locking minor
-  "private": true, // prevents npm publish option
-  "type": "module", // treats .js files as ESM standard (import/export)
-
-  "scripts": {},
-  "dependencies": {}, // needed for the app to run
-  "devDependencies": {} // needed during testing, bundler, typescript
+  "name": "@jscd/name",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

@@ -1,18 +1,27 @@
 {
   "name": "jscd",
   "version": "1.0.0",
-  "description": "A monorepo for JavaScript learning, DSA, and multi-framework projects.",
+  "description": "Monorepo for JavaScript apps, learning, and experiments.",
   "private": true,
   "workspaces": [
-    "apps/*",
+    "apps/*/*",
+    "packages/*",
     "learning/testing"
   ],
+  "scripts": {
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "test": "npm run test --workspaces --if-present"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/venkatasai-kadamati/javascript-workloads.git"
   },
   "type": "module",
   "homepage": "https://github.com/venkatasai-kadamati/javascript-workloads#readme",
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.5.9",
     "@tailwindcss/cli": "^4.3.3",
