@@ -5,8 +5,7 @@
   "private": true,
   "workspaces": [
     "apps/*/*",
-    "packages/*",
-    "learning/testing"
+    "packages/*"
   ],
   "scripts": {
     "lint": "biome check .",
