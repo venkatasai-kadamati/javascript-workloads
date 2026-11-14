@@ -1,40 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calci</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>calci</title>
 
-    <!-- simple appraoch is to keep it client side itself -->
-    <!-- solution uses fetch api -->
-    <script>
-        async function fetchAddOutput(){
-            // using dom -> grab 2 input box values
-            const first = document.getElementById("first").value;
-            const second = document.getElementById("second").value;
+  <!-- simple appraoch is to keep it client side itself -->
+  <!-- solution uses fetch api -->
+  <script>
+    async function fetchAddOutput() {
+      // using dom -> grab 2 input box values
+      const first = document.getElementById("first").value;
+      const second = document.getElementById("second").value;
 
-            // fetch api
-            const res = await fetch("http://localhost:3000/sum/" + first + "/" + second)
-            const json = await res.json();
+      // fetch api
+      const res = await fetch(
+        "http://localhost:3000/sum/" + first + "/" + second,
+      );
+      const json = await res.json();
 
-            // set div's innerHTML
-            document.getElementById("response").innerHTML = json.answer;
-            console.log(json);
+      // set div's innerHTML
+      document.getElementById("response").innerHTML = json.answer;
+    }
 
-        }
-    </script>
+    // post method + body (payload)
+    async function fetchSubOutput() {
+      // using dom -> grab 2 input box values
+      const first = document.getElementById("first").value;
+      const second = document.getElementById("second").value;
+
+      // fetch api
+      // note: fetch api with post needs 2 mandatory things
+      // 1. app.user(express.json)
+      // 2. header with content-type: application/json -> otherwise, fails to parse the body
+      // ! In Gui based app like requestly/postman by default for any post body request content-type: application/json is auto-generated
+      const res = await fetch("http://localhost:3000/sub/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ // we need to convert our json object into a string object for fetch api to work, axios libraries makes it easy and sits on top of the native fetch api
+          a: first,
+          b: second,
+        }),
+      });
+      const json = await res.json();
+
+      document.getElementById("response").innerHTML = json.answer;
+    }
+  </script>
 </head>
 
 <body>
-    <input id="first" type="text" placeholder="first num">
-    <input id="second" type="text" placeholder="second num">
+  <input id="first" type="text" placeholder="first num" />
+  <input id="second" type="text" placeholder="second num" />
 
-    <!-- 4 buttons for each -->
-    <button type="button" onclick="fetchAddOutput()">Add</button>
-    <button type="button">Sub</button>
-    <button type="button">Mul</button>
-    <button type="button">Div</button>
+  <!-- 4 buttons for each -->
+  <button type="button" onclick="fetchAddOutput()">Add</button>
+  <button type="button" onclick="fetchSubOutput()">Sub</button>
+  <button type="button">Mul</button>
+  <button type="button">Div</button>
 
-    <div id="response"></div>
+  <div id="response"></div>
 </body>
+
 </html>

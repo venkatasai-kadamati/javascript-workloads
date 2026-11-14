@@ -2,6 +2,7 @@ const express = require("express");
 
 // creating the first server with the standard naming app (application server)
 const app = express();
+app.use(express.json()); // parses application/json bodies into req.body
 
 // default home route -> render the html response
 // solution: use "res.sendFile("html_file")
@@ -29,7 +30,18 @@ app.get("/sum/:a/:b", (req, res) => {
   // res.send("<b><u>" + sum + "</u></b>");
 });
 
-// app.get("/sub");
+// uses body for payload instead of query/path params
+app.post("/sub", (req, res) => {
+  const a = Number(req.body.a);
+  const b = Number(req.body.b);
+
+  const sum = a - b;
+
+  res.json({
+    answer: sum,
+  });
+});
+
 // app.get("/mul");
 // app.get("/div");
 
