@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calci</title>
+
+    <!-- simple appraoch is to keep it client side itself -->
+    <!-- solution uses DOM + button's onclick attribute -->
+    <script>
+        function add(){
+            // using dom -> grab 2 input box values
+            const first = document.getElementById("first").value;
+            const second = document.getElementById("second").value;
+
+            // set div's innerHTML
+            document.getElementById("response").innerHTML = Number(first) + Number(second)
+        }
+    </script>
+</head>
+<body>
+    <input id="first" type="text" placeholder="first num">
+    <input id="second" type="text" placeholder="second num">
+
+    <!-- 4 buttons for each -->
+    <button type="button" onclick="add()">Add</button>
+    <button type="button">Sub</button>
+    <button type="button">Mul</button>
+    <button type="button">Div</button>
+
+    <div id="response"></div>
+</body>
+</html>
