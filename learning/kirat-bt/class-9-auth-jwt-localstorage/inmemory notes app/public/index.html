@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body style="display: flex; max-width: 100vw; padding: 0px 100px">
+    <!-- 2 containers -->
+    <!-- left container: show notes -->
+    <div id="left-container" style="flex: 1; border: 2px brown solid">
+        <!-- ! load the notes from backend -->
+    </div>
+
+    <!-- right container: create notes -->
+    <div id="right-container" style="flex: 1; border: 2px green solid">
+        <input type="text" placeholder="enter your note" id="create-input" />
+        <button onclick="createNote()">create note</button>
+    </div>
+
+    <script>
+        async function getNotes() {
+            // try {
+            //     const res = await fetch("/notes");
+            //     console.log("GET status:", res.status);
+
+            //     const data = await res.json();
+            //     console.log("Received notes:", data.notes);
+
+            //     const container = document.getElementById("left-container");
+            //     container.innerHTML = "";
+
+            //     data.notes.forEach((note) => {
+            //         const p = document.createElement("p");
+            //         p.textContent = note;
+            //         container.appendChild(p);
+            //     });
+            // } catch (error) {
+            //     console.error("GET failed:", error);
+            // }
+
+            // using axios instead of fetch
+            const response = await axios.get("http://localhost:3000/notes")
+            const notes = response.data.notes
+
+            const container = document.getElementById("left-container");
+            container.innerHTML = "";
+            notes.forEach((note) => {
+                const p = document.createElement("p");
+                p.textContent = note;
+                container.appendChild(p);
+            })
+
+
+        }
+
+        async function createNote() {
+            try {
+                const content = document.getElementById("create-input").value;
+
+                const res = await fetch("/createpost", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        note: content
+                    })
+                });
+
+                console.log("POST status:", res.status);
+
+                if (res.ok) {
+                    document.getElementById("create-input").value = "";
+                    await getNotes();
+                }
+            } catch (error) {
+                console.error("POST failed:", error);
+            }
+        }
+
+        getNotes();
+    </script>
+</body>
+
+</html>
