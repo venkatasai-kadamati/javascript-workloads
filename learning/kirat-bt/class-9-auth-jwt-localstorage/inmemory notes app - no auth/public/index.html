@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notes with auth</title>
+
+    <!-- tailwind is served on client browsers - so need to have cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body class="flex p-8">
+
+    <div class="flex flex-col flex-1 border-4 border-blue-600" id="create-note-container">
+        <!-- textArea + button -->
+        <input type="text" placeholder="enter note">
+        <button onclick="createNote()" class=" border-4 border-amber-600">create note</button>
+    </div>
+    <div class=" flex-1 border-4 border-red-500" id="display-notes-container">..loading
+    </div>
+
+    <script>
+        // logic for createNote, getNode
+        async function getNotes() {
+            // ask backend to send all notes available for rending
+            const res = await axios.get('http://localhost:3000/notes');
+            const notes = res.data.notes;
+
+            // CHANGES TO BE DONE
+            const parentContainer = document.getElementById("display-notes-container");
+            parentContainer.innerHTML = ""; // removes the loading..
+
+            notes.forEach((note) => {
+                const noteDiv = document.createElement("div");
+                noteDiv.innerHTML = note;
+
+                parentContainer.append(noteDiv);
+            });
+        }
+
+        async function createNote() {
+            console.log("called the create note function");
+
+            // setting up body
+            const body = {
+                note: "new note"
+            }
+            // ask backend to create a new note and send back the response
+            const res = await axios.post("http://localhost:3000/createnote", body)
+
+            await getNotes();
+        }
+        // on page load grab all notes
+        getNotes();
+    </script>
+</body>
+
+</html>
