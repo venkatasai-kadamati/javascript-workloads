@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notes with auth</title>
+
+    <!-- tailwind is served on client browsers - so need to have cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body class="flex p-8">
+
+    <div class="flex flex-col flex-1 border-4 border-blue-600" id="create-note-container">
+        <!-- textArea + button -->
+        <input type="text" placeholder="enter note" id="noteInput">
+        <button onclick="createNote()" class=" border-4 border-amber-600">create note</button>
+    </div>
+    <div class=" flex-1 border-4 border-red-500" id="display-notes-container">..loading
+    </div>
+
+    <script>
+        // logic for createNote, getNode
+        async function getNotes() {
+            // send token so auth middleware can identify the user
+            const headers = {
+                token: localStorage.getItem("token")
+            }
+            const res = await axios.get('http://localhost:3000/notes', { headers });
+            const notes = res.data.notes;
+
+            const parentContainer = document.getElementById("display-notes-container");
+            parentContainer.innerHTML = ""; // removes the loading..
+
+            notes.forEach((noteObj) => {
+                const noteDiv = document.createElement("div");
+                // notes are now { note, username } — render the text field
+                noteDiv.innerHTML = noteObj.note;
+
+                parentContainer.append(noteDiv);
+            });
+        }
+
+        async function createNote() {
+            const body = {
+                note: document.getElementById("noteInput").value
+            }
+            const headers = {
+                token: localStorage.getItem("token")
+            }
+            // token must be sent on create too — same bouncer
+            await axios.post("http://localhost:3000/createnote", body, { headers })
+
+            await getNotes();
+        }
+        // on page load grab all notes
+        getNotes();
+    </script>
+</body>
+
+</html>

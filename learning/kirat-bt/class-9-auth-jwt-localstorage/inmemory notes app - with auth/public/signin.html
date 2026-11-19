@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin</title>
+</head>
+
+<body>
+    <input type="text" placeholder="username" id="usernameInput">
+    <input type="password" placeholder="password" id="passwordInput">
+    <button onclick="signIn()">signin</button>
+
+    <script>
+        async function signIn() {
+            // ask backend to do the signin task + token generation + save to localStorage
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("passwordInput").value
+
+            const payload = {
+                username: username,
+                password: password
+            }
+
+            // ask the backend to signup with the input username + password
+            const response = await axios.post("http://localhost:3000/signin", payload)
+
+            const token = response.data.token;
+            console.log("printing token:", token);
+
+            // save the token in localStorage
+            localStorage.setItem("token", token)
+
+            // redirect to sign in page
+            window.location = "/"
+        }
+    </script>
+</body>
+
+</html>

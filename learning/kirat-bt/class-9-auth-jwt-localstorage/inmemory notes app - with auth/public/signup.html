@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+
+    <script>
+        async function signUp() {
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("passwordInput").value
+
+            const payload = {
+                username: username,
+                password: password
+            }
+
+            // ask the backend to signup with the input username + password
+            const response = await axios.post("http://localhost:3000/signup", payload)
+
+            console.log(response);
+
+            if (response.status >= 200 && response.status <= 299) {
+                response.data.message
+            }
+
+            // redirect to sign in page
+            window.location = "/signin"
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <input type="text" placeholder="username" id="usernameInput">
+    <input type="password" placeholder="password" id="passwordInput">
+    <button onclick="signUp()">signup</button>
+</body>
+
+</html>
